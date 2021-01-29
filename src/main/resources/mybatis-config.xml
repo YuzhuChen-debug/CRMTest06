@@ -9,6 +9,7 @@
   <typeAliases>
   
   	<package name="com.huanaco.crm.settings.domain"/>
+    <package name="com.huanaco.crm.workbench.domain"/>
   	
   
   </typeAliases>
@@ -29,6 +30,7 @@
   <mappers>
    
       <package name="com.huanaco.crm.settings.dao"/>
+      <package name="com.huanaco.crm.workbench.dao"/>
     
   </mappers>
 </configuration>

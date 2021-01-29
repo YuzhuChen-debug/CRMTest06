@@ -4,14 +4,33 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
-
+  <filter>
+    <filter-name>EcondingFilter</filter-name>
+    <filter-class>com.huanaco.crm.filter.EcondingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EcondingFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+<!--用户登录-->
   <servlet>
     <servlet-name>UserController</servlet-name>
     <servlet-class>com.huanaco.crm.settings.web.controller.UserController</servlet-class>
   </servlet>
+ <servlet-mapping>
+   <servlet-name>UserController</servlet-name>
+   <url-pattern>/settings/User/login.do</url-pattern>
+ </servlet-mapping>
+
+<!--市场活动-->
+  <servlet>
+    <servlet-name>ActivityController</servlet-name>
+    <servlet-class>com.huanaco.crm.workbench.web.ActivityController</servlet-class>
+  </servlet>
   <servlet-mapping>
-    <servlet-name>UserController</servlet-name>
-    <url-pattern>/settings/User/login.do</url-pattern>
+    <servlet-name>ActivityController</servlet-name>
+    <url-pattern>/workbench/Activity/userList.do</url-pattern>
+      <url-pattern>/workbench/Activity/save.do</url-pattern>
 
   </servlet-mapping>
 

@@ -34,11 +34,13 @@ public class UserController extends HttpServlet {
         String loginPwd = request.getParameter("loginPwd");
         loginPwd = MD5Util.getMD5(loginPwd);
         String ip = request.getRemoteAddr();
+        System.out.println(ip);
         UserService us = (UserService) ServiceFactory.getService(new UserServiceImpl());
-
         try{
             User user = us.login(loginAct,loginPwd,ip);
-            PrintJson.printJsonObj(response,true);
+            request.getSession().setAttribute("user",user);
+            PrintJson.printJsonFlag(response,true);
+            System.out.println(1);
         }catch(Exception e){
             e.printStackTrace();
             String msg = e.getMessage();
