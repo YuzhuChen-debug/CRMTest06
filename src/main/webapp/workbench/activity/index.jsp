@@ -117,13 +117,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				success:function (data) {
 					//返回的数据结果
 					/*
-					* 	data:{success:true,vaac:{count:count,aList:[{l1},{l2},{l3}]}},
+					* 	data:{success:true,caav:{count:count,aList:[{l1},{l2},{l3}]}},
 					* or data:{success/false,msg:msg}
 					* */
 					if(data.success){
+						alert(data.caav.total);
 						//把返回的数据写到jsp当中
 						var html="";
-						$.each(data.vaac,function (i,n) {
+						$.each(data.caav.aList,function (i,n) {
 							html+= '<tr class="active">';
 							html+= '	<td><input type="checkbox" value="'+n.id+'"/></td>';
 							html+= '	<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href=\'detail.html\';">'+n.name+'</a></td>';

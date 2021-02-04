@@ -1,5 +1,6 @@
 package com.huanaco.crm.workbench.web;
 
+import com.huanaco.crm.VO.CountAndActivityVO;
 import com.huanaco.crm.settings.Services.Imp.UserServiceImpl;
 import com.huanaco.crm.settings.Services.UserService;
 import com.huanaco.crm.settings.domain.User;
@@ -13,7 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ActivityController extends HttpServlet {
     @Override
@@ -29,7 +32,38 @@ public class ActivityController extends HttpServlet {
     }
 
     private void pageList(HttpServletRequest request, HttpServletResponse response) {
-
+        System.out.println("进入到页面查询控制器 ");
+        String owner = request.getParameter("owner");
+        String name = request.getParameter("name");
+        String startDate = request.getParameter("startDate");
+        String endDate = request.getParameter("endDate");
+        String pageNoStr = request.getParameter("pageNo");
+        int pageNo = Integer.parseInt(pageNoStr);
+        String pageSizeStr = request.getParameter("pageSize");
+        int pageSize = Integer.parseInt(pageSizeStr);
+        int pageCount = (pageNo-1)*pageSize;
+        Map<String,Object> map = new HashMap<>();
+        map.put("owner",owner);
+        map.put("name",name);
+        map.put("startDate",startDate);
+        map.put("endDate",endDate);
+        map.put("pageSize",pageSize);
+        map.put("pageCount",pageCount);
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        try{
+            CountAndActivityVO caav = as.pageList(map);
+            Map<String,Object> map1 = new HashMap<>();
+            map1.put("success",true);
+            map1.put("caav",caav);
+            PrintJson.printJsonObj(response,map1);
+        }catch(Exception e){
+            e.printStackTrace();
+            String msg = e.getMessage();
+            Map<String,Object> map2 = new HashMap<>();
+            map2.put("success",false);
+            map2.put("msg",msg);
+            PrintJson.printJsonObj(response,map2);
+        }
     }
 
     private void save(HttpServletRequest request, HttpServletResponse response) {
