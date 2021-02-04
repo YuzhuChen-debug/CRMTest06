@@ -23,7 +23,13 @@ public class ActivityController extends HttpServlet {
             getUserList(request,response);
         }else if("/workbench/Activity/save.do".equals(path)){
             save(request,response);
+        }else if("/workbench/Activity/pageList.do".equals(path)){
+            pageList(request,response);
         }
+    }
+
+    private void pageList(HttpServletRequest request, HttpServletResponse response) {
+
     }
 
     private void save(HttpServletRequest request, HttpServletResponse response) {
