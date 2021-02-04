@@ -78,6 +78,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					if(data.success){
 						//刷新列表
 						pageList(1 ,$("#activityPage").bs_pagination('getOption', 'rowsPerPage'));
+						$("#activityAddForm")[0].reset();
 						//关闭模态窗口
 						$("#createActivityModal").modal("hide");
 					}else{
@@ -199,7 +200,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 	<!-- 创建市场活动的模态窗口 -->
 	<div class="modal fade" id="createActivityModal" role="dialog">
 		<div class="modal-dialog" role="document" style="width: 85%;">
-			<div class="modal-content">
+			<div class="modal-content" >
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 						<span aria-hidden="true">×</span>
@@ -208,7 +209,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				</div>
 				<div class="modal-body">
 				
-					<form class="form-horizontal" role="form">
+					<form class="form-horizontal" role="form"  id="activityAddForm">
 					
 						<div class="form-group">
 							<label for="create-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
