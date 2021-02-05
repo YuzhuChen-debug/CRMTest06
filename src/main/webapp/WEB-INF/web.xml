@@ -32,6 +32,7 @@
     <url-pattern>/workbench/Activity/userList.do</url-pattern>
       <url-pattern>/workbench/Activity/save.do</url-pattern>
       <url-pattern>/workbench/Activity/pageList.do</url-pattern>
+      <url-pattern>/workbench/Activity/delete.do</url-pattern>
 
   </servlet-mapping>
 

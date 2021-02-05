@@ -97,6 +97,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		})
 
 		function pageList(pageNo,pageSize) {
+			$("#qx").prop("checked",false);
 			$("#serch-name").val($("#hidden-name").val());
 			$("#serch-owner").val($("#hidden-owner").val());
 			$("#serch-startDate").val($("#hidden-startDate").val());
@@ -183,6 +184,46 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 
 		$("#activityBody").on("click",$("input[name=xz]"),function () {
 			$("#qx").prop("checked",$("input[name=xz]").length==$("input[name=xz]:checked").length);
+		});
+
+
+		$("#deleteBtn").click(function () {
+			var $xz = $("input[name=xz]:checked");
+			if($xz.length==0){
+				alert("请选择要删除的对象");
+			}else{
+				if(confirm("是否要删除")){
+					//alert("删除成功");
+					var param = "";
+					for(var i=0;i<$xz.length;i++){
+						param += "id="+$($xz[i]).val();
+						if(i<$xz.length-1){
+							param += "&";
+						}
+					}
+					$.ajax({
+						url:"workbench/Activity/delete.do",
+						data:param,
+						dataType:"json",
+						type:"post",
+						success:function (data) {
+							/*
+                            * data:true  or data:msg
+                            * 如果返回的是true,刷新列表,如果是false,弹出alert("msg");
+                            * */
+							if(data.success){
+								//刷新列表
+								pageList(1,2);
+							}else{
+								alert(data.msg);
+							}
+						}
+					})
+
+				}
+
+
+			}
 		});
 
 
@@ -278,26 +319,26 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						<div class="form-group">
 							<label for="edit-marketActivityOwner" class="col-sm-2 control-label">所有者<span style="font-size: 15px; color: red;">*</span></label>
 							<div class="col-sm-10" style="width: 300px;">
-								<select class="form-control" id="edit-marketActivityOwner">
-								  <option>zhangsan</option>
+								<select class="form-control" id="edit-owner">
+								  <%--<option>zhangsan</option>
 								  <option>lisi</option>
-								  <option>wangwu</option>
+								  <option>wangwu</option>--%>
 								</select>
 							</div>
                             <label for="edit-marketActivityName" class="col-sm-2 control-label">名称<span style="font-size: 15px; color: red;">*</span></label>
                             <div class="col-sm-10" style="width: 300px;">
-                                <input type="text" class="form-control" id="edit-marketActivityName" value="发传单">
+                                <input type="text" class="form-control" id="edit-name" value="发传单">
                             </div>
 						</div>
 
 						<div class="form-group">
 							<label for="edit-startTime" class="col-sm-2 control-label">开始日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-startTime" value="2020-10-10">
+								<input type="text" class="form-control time" id="edit-startDate" value="2020-10-10">
 							</div>
 							<label for="edit-endTime" class="col-sm-2 control-label">结束日期</label>
 							<div class="col-sm-10" style="width: 300px;">
-								<input type="text" class="form-control" id="edit-endTime" value="2020-10-20">
+								<input type="text" class="form-control time" id="edit-endDate" value="2020-10-20">
 							</div>
 						</div>
 						
@@ -378,7 +419,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				<div class="btn-group" style="position: relative; top: 18%;">
 				  <button type="button" class="btn btn-primary" id="addBtn"><span class="glyphicon glyphicon-plus"></span> 创建</button>
 				  <button type="button" class="btn btn-default" id="editBtn"><span class="glyphicon glyphicon-pencil"></span> 修改</button>
-				  <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-minus"></span> 删除</button>
+				  <button type="button" class="btn btn-danger" id="deleteBtn"><span class="glyphicon glyphicon-minus"></span> 删除</button>
 				</div>
 				
 			</div>
