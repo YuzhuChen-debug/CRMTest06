@@ -1,14 +1,18 @@
 package com.huanaco.crm.workbench.Services.Impl;
 
 import com.huanaco.crm.Exceptions.DeleteActivityAndActivityRemarkErrorException;
+import com.huanaco.crm.Exceptions.GetUListAndActivityErrorException;
 import com.huanaco.crm.Exceptions.PageListErrorException;
 import com.huanaco.crm.VO.CountAndActivityVO;
+import com.huanaco.crm.settings.dao.UserDao;
+import com.huanaco.crm.settings.domain.User;
 import com.huanaco.crm.utils.SqlSessionUtil;
 import com.huanaco.crm.workbench.Services.ActivityService;
 import com.huanaco.crm.workbench.dao.ActivityDao;
 import com.huanaco.crm.workbench.dao.ActivityRemarkDao;
 import com.huanaco.crm.workbench.domain.Activity;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,6 +20,7 @@ import java.util.Map;
 public class ActivityServiceImpl implements ActivityService {
     ActivityDao activityDao = SqlSessionUtil.getSqlSession().getMapper(ActivityDao.class);
     ActivityRemarkDao activityRemarkDao = SqlSessionUtil.getSqlSession().getMapper(ActivityRemarkDao.class);
+    UserDao userDao = SqlSessionUtil.getSqlSession().getMapper(UserDao.class);
     @Override
     public boolean save(Activity activity) {
         boolean flag = false;
@@ -67,10 +72,28 @@ public class ActivityServiceImpl implements ActivityService {
         if(count3==-1){
             throw new DeleteActivityAndActivityRemarkErrorException("删除市场活动条数失败");
         }
+        System.out.println(count3);
+        System.out.println(ids.length);
         if(count3!=ids.length){
             throw new DeleteActivityAndActivityRemarkErrorException("删除市场活动条数跟需要删除条数不一致");
         }
         //返回结果
         return success;
+    }
+
+    @Override
+    public Map<String, Object> getActivityAndUList(String id) throws GetUListAndActivityErrorException {
+        Map<String,Object> map = new HashMap<>();
+        List<User> userList = userDao.getUserList();
+        if(userList==null){
+            throw new GetUListAndActivityErrorException("获取用户列表错误");
+        }
+        map.put("uList",userList);
+        Activity activity = activityDao.getActivityById(id);
+        if(activity==null){
+            throw new GetUListAndActivityErrorException("获取市场活动列表失败");
+        }
+        map.put("activity",activity);
+        return map;
     }
 }

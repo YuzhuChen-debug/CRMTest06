@@ -8,7 +8,6 @@ import com.huanaco.crm.utils.*;
 import com.huanaco.crm.workbench.Services.ActivityService;
 import com.huanaco.crm.workbench.Services.Impl.ActivityServiceImpl;
 import com.huanaco.crm.workbench.domain.Activity;
-import org.apache.ibatis.session.SqlSessionFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +30,29 @@ public class ActivityController extends HttpServlet {
             pageList(request,response);
         }else if("/workbench/Activity/delete.do".equals(path)){
             delete(request,response);
+        }else if("/workbench/Activity/getActivityAndUList.do".equals(path)){
+            getActivityAndUList(request,response);
+        }
+    }
+
+    private void getActivityAndUList(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("进入到打开修改模块控制器");
+        String id = request.getParameter("id");
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        try{
+            Map<String,Object> map = as.getActivityAndUList(id);
+            Map<String,Object> map1 = new HashMap<>();
+            map1.put("success",true);
+            map1.put("map",map);
+            PrintJson.printJsonObj(response,map1);
+        }catch (Exception e){
+            String msg = e.getMessage();
+            e.printStackTrace();
+            Map<String,Object> map2 = new HashMap<>();
+            map2.put("success",false);
+            map2.put("msg",msg);
+            PrintJson.printJsonObj(response,map2);
+
         }
     }
 

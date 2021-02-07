@@ -1,6 +1,7 @@
 package com.huanaco.crm.workbench.Services;
 
 import com.huanaco.crm.Exceptions.DeleteActivityAndActivityRemarkErrorException;
+import com.huanaco.crm.Exceptions.GetUListAndActivityErrorException;
 import com.huanaco.crm.Exceptions.PageListErrorException;
 import com.huanaco.crm.VO.CountAndActivityVO;
 import com.huanaco.crm.settings.domain.User;
@@ -16,4 +17,6 @@ public interface ActivityService {
     CountAndActivityVO pageList(Map<String, Object> map) throws PageListErrorException;
 
     boolean delete(String[] ids) throws DeleteActivityAndActivityRemarkErrorException;
+
+    Map<String, Object> getActivityAndUList(String id) throws GetUListAndActivityErrorException;
 }
