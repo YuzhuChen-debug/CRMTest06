@@ -4,8 +4,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 	<base href="<%=basePath%>">
+<meta charset="UTF-8">
+
 <link href="jquery/bootstrap_3.3.0/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <link href="jquery/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" />
 
@@ -141,7 +142,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						$.each(data.caav.aList,function (i,n) {
 							html+= '<tr class="active">';
 							html+= '	<td><input type="checkbox" name="xz" value="'+n.id+'"/></td>';
-							html+= '	<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href=\'detail.html\';">'+n.name+'</a></td>';
+							html+= '	<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href=\'workbench/activity/detail.do?id='+n.id+'\';">'+n.name+'</a></td>';
 							html+= '	<td>'+n.owner+'</td>';
 							html+= '	<td>'+n.startDate+'</td>';
 							html+= '	<td>'+n.endDate+'</td>';
@@ -300,7 +301,9 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 				success:function (data) {
 					if(data.success){
 						//刷新列表
-						pageList(1 ,$("#activityPage").bs_pagination('getOption', 'rowsPerPage'));
+						pageList($("#activityPage").bs_pagination('getOption', 'currentPage')
+								,$("#activityPage").bs_pagination('getOption', 'rowsPerPage'));
+
 						//关闭模态窗口
 						$("#editActivityModal").modal("hide");
 					}else{
@@ -522,14 +525,14 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<tbody id="activityBody">
 						<%--<tr class="active">
 							<td><input type="checkbox" /></td>
-							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">发传单</a></td>
+							<td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detaidetail.jsp传单</a></td>
                             <td>zhangsan</td>
 							<td>2020-10-10</td>
 							<td>2020-10-20</td>
 						</tr>
                         <tr class="active">
                             <td><input type="checkbox" /></td>
-                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detail.html';">发传单</a></td>
+                            <td><a style="text-decoration: none; cursor: pointer;" onclick="window.location.href='detaidetail.jsp传单</a></td>
                             <td>zhangsan</td>
                             <td>2020-10-10</td>
                             <td>2020-10-20</td>

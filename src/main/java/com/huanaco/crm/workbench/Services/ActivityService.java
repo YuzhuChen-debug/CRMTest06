@@ -21,4 +21,6 @@ public interface ActivityService {
     Map<String, Object> getActivityAndUList(String id) throws GetUListAndActivityErrorException;
 
     boolean updateActivity(Activity a);
+
+    Activity getActivityDetialById(String id);
 }

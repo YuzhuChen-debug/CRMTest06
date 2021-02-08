@@ -34,7 +34,18 @@ public class ActivityController extends HttpServlet {
             getActivityAndUList(request,response);
         }else if("/workbench/Activity/update.do".equals(path)){
             updateActivity(request,response);
+        }else if("/workbench/activity/detail.do".equals(path)){
+            getActivityDetail(request,response);
         }
+    }
+
+    private void getActivityDetail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("进入到市场活动详情控制器");
+        String id = request.getParameter("id");
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        Activity activity = as.getActivityDetialById(id);
+        request.setAttribute("a",activity);
+        request.getRequestDispatcher("/workbench/activity/detail.jsp").forward(request,response);
     }
 
     private void updateActivity(HttpServletRequest request, HttpServletResponse response) {
