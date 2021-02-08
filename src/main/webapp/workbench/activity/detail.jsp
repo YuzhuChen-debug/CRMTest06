@@ -222,7 +222,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		</div>
 		
 		<!-- 备注1 -->
-		<div class="remarkDiv" style="height: 60px;">
+		<%--<div class="remarkDiv" style="height: 60px;">
 			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 			<div style="position: relative; top: -40px; left: 40px;" >
 				<h5>哎呦！</h5>
@@ -233,10 +233,10 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<a class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color: #E6E6E6;"></span></a>
 				</div>
 			</div>
-		</div>
+		</div>--%>
 		
 		<!-- 备注2 -->
-		<div class="remarkDiv" style="height: 60px;">
+		<%--<div class="remarkDiv" style="height: 60px;">
 			<img title="zhangsan" src="image/user-thumbnail.png" style="width: 30px; height:30px;">
 			<div style="position: relative; top: -40px; left: 40px;" >
 				<h5>呵呵！</h5>
@@ -247,7 +247,7 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 					<a class="myHref" href="javascript:void(0);"><span class="glyphicon glyphicon-remove" style="font-size: 20px; color: #E6E6E6;"></span></a>
 				</div>
 			</div>
-		</div>
+		</div>--%>
 		
 		<div id="remarkDiv" style="background-color: #E6E6E6; width: 870px; height: 90px;">
 			<form role="form" style="position: relative;top: 10px; left: 10px;">
