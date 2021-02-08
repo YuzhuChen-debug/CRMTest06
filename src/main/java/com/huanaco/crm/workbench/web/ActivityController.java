@@ -32,7 +32,37 @@ public class ActivityController extends HttpServlet {
             delete(request,response);
         }else if("/workbench/Activity/getActivityAndUList.do".equals(path)){
             getActivityAndUList(request,response);
+        }else if("/workbench/Activity/update.do".equals(path)){
+            updateActivity(request,response);
         }
+    }
+
+    private void updateActivity(HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("进入到修改市场活动信息控制器");
+        String  id = request.getParameter("id");
+        String  owner = request.getParameter("owner");
+        String  name = request.getParameter("name");
+        String  startDate = request.getParameter("startDate");
+        String  endDate = request.getParameter("endDate");
+        String  cost = request.getParameter("cost");
+        String  description = request.getParameter("description");
+        String  editTime = DateTimeUtil.getSysTime();
+        String  editBy = ((User)request.getSession().getAttribute("user")).getName();
+        Activity a = new Activity();
+        a.setId(id);
+        a.setOwner(owner);
+        a.setName(name);
+        a.setStartDate(startDate);
+        a.setEndDate(endDate);
+        a.setCreateBy(editBy);
+        a.setCreateTime(editTime);
+        a.setCost(cost);
+        a.setDescription(description);
+        ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
+        boolean success = as.updateActivity(a);
+        PrintJson.printJsonFlag(response,success);
+
+
     }
 
     private void getActivityAndUList(HttpServletRequest request, HttpServletResponse response) {

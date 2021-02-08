@@ -283,6 +283,32 @@ String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 		})
 
 		//执行修改操作
+		$("#updateBtn").click(function () {
+			$.ajax({
+				url:"workbench/Activity/update.do",
+				dataType: "json",
+				type:"post",
+				data:{
+					"id":$.trim($("#edit-id").val()),
+					"owner" : $.trim($("#edit-owner").val()),
+					"name" : $.trim($("#edit-name").val()),
+					"startDate" : $.trim($("#edit-startDate").val()),
+					"endDate" : $.trim($("#edit-endDate").val()),
+					"cost" : $.trim($("#edit-cost").val()),
+					"description" : $.trim($("#edit-description").val())
+				},
+				success:function (data) {
+					if(data.success){
+						//刷新列表
+						pageList(1 ,$("#activityPage").bs_pagination('getOption', 'rowsPerPage'));
+						//关闭模态窗口
+						$("#editActivityModal").modal("hide");
+					}else{
+						alert("保存市场活动信息失败");
+					}
+				}
+			})
+		})
 
 
 

@@ -19,4 +19,6 @@ public interface ActivityService {
     boolean delete(String[] ids) throws DeleteActivityAndActivityRemarkErrorException;
 
     Map<String, Object> getActivityAndUList(String id) throws GetUListAndActivityErrorException;
+
+    boolean updateActivity(Activity a);
 }
