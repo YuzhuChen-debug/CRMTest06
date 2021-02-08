@@ -54,8 +54,8 @@ public class ActivityController extends HttpServlet {
         a.setName(name);
         a.setStartDate(startDate);
         a.setEndDate(endDate);
-        a.setCreateBy(editBy);
-        a.setCreateTime(editTime);
+        a.setEditBy(editBy);
+        a.setEditTime(editTime);
         a.setCost(cost);
         a.setDescription(description);
         ActivityService as = (ActivityService) ServiceFactory.getService(new ActivityServiceImpl());
